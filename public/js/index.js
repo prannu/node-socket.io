@@ -9,7 +9,7 @@ socket.on('connect',function(){
   // });
 
   socket.emit('createMessage',{
-    to:"test@example.com",
+    from:"Praveen",
     text:"checkinh client server connection"
   });
 });

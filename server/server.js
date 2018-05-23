@@ -29,8 +29,13 @@ io.on('connection',(socket)=>{
     text: "Trying socket.io",
     createdBy:"Prveen Reddy"
   });
-  socket.on('createMessage',(email)=>{
-    console.log(email);
+  socket.on('createMessage',(message)=>{
+    console.log(message);
+    io.emit('newMessage',{
+      text:message.text,
+      from:message.from,
+      cretaedAt: new Date().getDate()
+    })
   });
   socket.on('disconnect',()=>{
     console.log('User was disconencted');
