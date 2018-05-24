@@ -5,6 +5,7 @@ const socketIO = require('socket.io');
 const publicPath = path.join(__dirname,'../public');
 // console.log(__dirname + '/../public' );
 // console.log(publicPath);
+const {generateMessage}= require('./utils/message');
 const port = process.env.PORT || 3000;
 var app = express();
 var server = http.createServer(app);
@@ -24,10 +25,11 @@ io.on('connection',(socket)=>{
   // socket.on('createEmail',(email)=>{
   //   console.log(email);
   // });
-  socket.emit('newMessage',{
-    from: 'Admin',
-    text: 'Welcome to the chat app'
-  });
+  socket.emit('newMessage',generateMessage('Admin','welcome to chat app')
+  // {
+  //   from: 'Admin',
+  //   text: 'Welcome to the chat app'  }
+  );
   socket.broadcast.emit('newMessage',{
     from: 'Admin',
     text: 'New user joined',
@@ -39,7 +41,7 @@ io.on('connection',(socket)=>{
     io.emit('newMessage',{
       text:message.text,
       from:message.from,
-      cretaedAt: new Date().getDate()
+      cretaedAt: new Date().getTime()
     });
 
     // socket.broadcast.emit('newMessage',{
