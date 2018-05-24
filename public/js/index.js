@@ -10,7 +10,7 @@ socket.on('connect',function(){
 
   socket.emit('createMessage',{
     from:"Praveen",
-    text:"checkinh client server connection"
+    text:"checking client server connection"
   });
 });
 

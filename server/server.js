@@ -25,17 +25,28 @@ io.on('connection',(socket)=>{
   //   console.log(email);
   // });
   socket.emit('newMessage',{
-    from: "Praveen",
-    text: "Trying socket.io",
-    createdBy:"Prveen Reddy"
+    from: 'Admin',
+    text: 'Welcome to the chat app'
   });
+  socket.broadcast.emit('newMessage',{
+    from: 'Admin',
+    text: 'New user joined',
+    createdAt: new Date().getTime()
+  })
+
   socket.on('createMessage',(message)=>{
     console.log(message);
     io.emit('newMessage',{
       text:message.text,
       from:message.from,
       cretaedAt: new Date().getDate()
-    })
+    });
+
+    // socket.broadcast.emit('newMessage',{
+    //   from: message.from,
+    //   text: message.text,
+    //   cretaedAt: new Date().getime()
+    // });
   });
   socket.on('disconnect',()=>{
     console.log('User was disconencted');
